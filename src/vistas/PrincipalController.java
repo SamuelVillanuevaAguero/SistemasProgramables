@@ -6,6 +6,7 @@ package vistas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -43,7 +46,7 @@ public class PrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        botonEstadisticas.setOnMouseClicked (event -> {
+        botonEstadisticas.setOnMouseClicked(event -> {
             try {
                 estadiscticas(event);
             } catch (IOException ex) {
@@ -59,35 +62,48 @@ public class PrincipalController implements Initializable {
             }
         });
     }
-    
+
     @FXML
     public void minimizarVentana(ActionEvent event) {
         ((Stage) botonMinimizar.getScene().getWindow()).setIconified(true);
     }
 
     @FXML
-    public void cerrarVentana(ActionEvent event) {
-        ((Stage) botonCerrar.getScene().getWindow()).close();
+    public void cerrarVentana(ActionEvent event) throws IOException {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Sesión");
+        alerta.setHeaderText(null);
+        alerta.setContentText("¿Quieres cerrar sesión?");
+
+        if (alerta.showAndWait().get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/vistas/InicioSesion.fxml"));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
-    
+
     @FXML
-    public void signos(MouseEvent event) throws IOException{
+    public void signos(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/vistas/Signos.fxml"));
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-    
-    @FXML
-    public void estadiscticas(MouseEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Historial.fxml"));
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+    @FXML
+    public void estadiscticas(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Historial.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

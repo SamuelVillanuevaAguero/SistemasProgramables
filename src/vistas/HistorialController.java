@@ -15,7 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -81,8 +83,21 @@ public class HistorialController implements Initializable {
     }
 
     @FXML
-    public void cerrarVentana(ActionEvent event) {
-        ((Stage) botonCerrar.getScene().getWindow()).close();
+    public void cerrarVentana(ActionEvent event) throws IOException {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Sesión");
+        alerta.setHeaderText(null);
+        alerta.setContentText("¿Quieres cerrar sesión?");
+
+        if (alerta.showAndWait().get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/vistas/InicioSesion.fxml"));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
     
     @FXML

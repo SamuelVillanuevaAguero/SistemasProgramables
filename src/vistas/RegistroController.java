@@ -174,7 +174,7 @@ public class RegistroController implements Initializable {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         alerta.setTitle("Confirmación");
         alerta.setHeaderText(null);
-        alerta.setContentText("¿Quieres cerrar?");
+        alerta.setContentText("¿Quieres cerrar la aplicación?");
 
         if (alerta.showAndWait().get() == ButtonType.OK) {
             ((Stage) botonCerrar.getScene().getWindow()).close();

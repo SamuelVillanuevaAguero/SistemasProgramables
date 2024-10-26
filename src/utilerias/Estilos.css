@@ -24,6 +24,24 @@
     -fx-text-fill: #333333;
 }
 
+.info-card {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Monserrat', sans-serif;
+    -fx-text-fill: #A0041E;
+}
+
+.info-card2 {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Monserrat', sans-serif;
+    -fx-text-fill: #043DA0;
+}
+
+.info-card-signos {
+    -fx-font-size: 32px;
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Monserrat', sans-serif;
+}
+
 /* Estilos para los títulos principales */
 .title {
     -fx-font-size: 48px;
