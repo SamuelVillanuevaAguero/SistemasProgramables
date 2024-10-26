@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1012.0" styleClass="root" stylesheets="@../utilerias/Estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.HistorialController">
+   <children>
+      <HBox id="barraSuperior" prefHeight="16.0" prefWidth="1012.0">
+         <children>
+            <Button id="botonBarra" fx:id="botonRegresar" mnemonicParsing="false" onAction="#regresar" text="&lt;-" />
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button id="botonBarra" fx:id="botonMinimizar" mnemonicParsing="false" onAction="#minimizarVentana" text="-" />
+            <Button id="botonBarra" fx:id="botonCerrar" mnemonicParsing="false" onAction="#cerrarVentana" text="x" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="74.0" layoutY="83.0" prefHeight="55.0" prefWidth="871.0" styleClass="title" text="Revisión semanal" />
+      <ImageView fitHeight="81.0" fitWidth="196.0" layoutX="70.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utilerias/corazon2.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="91.2" layoutY="161.0" prefHeight="367.0" prefWidth="871.0" styleClass="card-info" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="170.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Nombre:" />
+            <Label layoutX="15.0" layoutY="53.0" text="Periodo:" />
+            <Label alignment="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="17.0" prefWidth="287.0" text="Samuel Villanueva Aguero" />
+            <Label alignment="CENTER" layoutX="91.0" layoutY="53.0" prefHeight="17.0" prefWidth="287.0" text="15 al 22 de septiembre del 2024" />
+            <Label layoutX="490.0" layoutY="14.0" text="Edad:" />
+            <Label layoutX="490.0" layoutY="45.0" text="Peso:" />
+            <TableView fx:id="tableView" layoutX="14.0" layoutY="104.0" prefHeight="200.0" prefWidth="844.0">
+              <columns>
+                <TableColumn fx:id="fechaColumn" prefWidth="109.59997367858887" text="FECHA" />
+                <TableColumn fx:id="ritmoCardiacoColumn" prefWidth="324.8000717163086" text="RITMO CARDIACO PROMEDIO (Ipm)" />
+                  <TableColumn fx:id="oxigenacionColumn" prefWidth="407.1998596191406" text="NIVEL DE OXIGENACIÓN PROMEDIO (%)" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

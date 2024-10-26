@@ -1,0 +1,218 @@
+/* 
+    Created on : 20 oct. 2024, 15:49:17
+    Author     : Samuel Villanueva Aguero
+*/
+
+/* Estilos generales para todas las ventanas */
+
+.root {
+    -fx-background-color: white; /* Fondo claro */
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-padding: 20px;
+}
+
+/* Estilos para la barra superior con los botones de cerrar, minimizar, etc. */
+#barraSuperior {
+    -fx-background-color: #256D7B; /* Color de fondo azul oscuro */
+    -fx-padding: 12px;
+    -fx-alignment: center-right
+}
+
+/* Estilos adicionales */
+.label {
+    -fx-font-size: 15px;
+    -fx-text-fill: #333333;
+}
+
+/* Estilos para los títulos principales */
+.title {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #256D7B; /* Azul oscuro */
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #256D7B; /* Azul oscuro */
+}
+
+/* Estilos para el botón "Exportar PDF" */
+#exportarBtn {
+    -fx-background-color: #0D5469; /* Azul oscuro */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+#exportarBtn:hover {
+    -fx-background-color: #0B4759; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilo para las tarjetas en la pantalla de bienvenida */
+.card {
+    -fx-background-color: white;
+    -fx-border-color: #DADADA;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);
+}
+
+.card img {
+    -fx-padding-bottom: 10px;
+}
+
+/* Estilo para las tablas */
+.table-view {
+    -fx-background-color: #e2f0fa; /* Color de fondo del TableView */
+    -fx-border-color: #b4cfe4; /* Bordes de la tabla */
+    -fx-table-cell-border-color: transparent; /* Sin bordes entre celdas */
+}
+
+.table-view .column-header {
+    -fx-background-color: #95C5E0; /* Fondo celeste más oscuro para los encabezados */
+    -fx-alignment: center; /* Centrar texto en encabezados */
+    -fx-text-fill: #333333; /* Color de texto oscuro */
+    -fx-font-weight: lighter;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #e5effd; /* Color de fondo para las filas */
+    -fx-border-width: 0 0 0.5 0; /* Borde inferior para separar filas */
+    -fx-border-color: #b4cfe4; /* Color del borde */
+}
+
+.table-view .table-cell {
+    -fx-alignment: center; /* Texto centrado en las celdas */
+    -fx-padding: 8px; /* Espaciado interior de las celdas */
+    -fx-text-fill: #333333; /* Color del texto de las celdas */
+    -fx-border-color: #b4cfe4; /* Sin bordes entre celdas */
+}
+
+.table-view .scroll-bar:vertical .track,
+.table-view .scroll-bar:horizontal .track {
+    -fx-background-color: #cccccc; /* Color del fondo de la barra */
+}
+
+/* Cambiar el color del "thumb" (la parte que se mueve) */
+.table-view .scroll-bar:vertical .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: white; /* Color del pulgar (la parte móvil) */
+}
+
+
+/* Estilos para los campos de texto y botones del formulario de registro */
+.text-field,
+.password-field,
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5D8;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+}
+
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused {
+    -fx-border-color: #0D5469; /* Color del borde cuando está enfocado */
+}
+
+.button-verde {
+    -fx-background-color: #256D7B; /* Azul oscuro */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-font-weight: bold;
+    
+}
+
+.button-verde:hover {
+    -fx-background-color: #0B4759; /* Cambiar a un tono más oscuro al pasar el mouse */
+}
+
+.button-verde:disabled {
+    -fx-background-color: #D1D5D8;
+    -fx-text-fill: #B0B0B0;
+}
+
+.button-blanco {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-font-weight: bold;
+}
+
+.button-blanco:hover {
+    -fx-background-color: #DCEBF1;
+}
+
+.button-blanco:disabled {
+    -fx-background-color: #D1D5D8;
+    -fx-text-fill: #B0B0B0;
+}
+
+/* Estilos para los placeholders */
+.text-field:prompt-text,
+.password-field:prompt-text {
+    -fx-text-fill: #A0A0A0;
+}
+
+/* Estilo para los cuadros de información (como edad, peso) */
+.info-box {
+    -fx-background-color: #F0F4F8;
+    -fx-padding: 5px 10px;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Flecha hacia atrás */
+.back-arrow {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-text-fill: #256D7B;
+    -fx-font-size: 24px;
+}
+
+.back-arrow:hover {
+    -fx-text-fill: #0D5469;
+}
+
+/* Estilo para el contenedor de los datos de la tarjeta */
+.card-info {
+    -fx-background-color: white;
+    -fx-border-color: #DADADA;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.error-message {
+    -fx-text-fill: #D9534F;
+    -fx-font-size: 12px;
+}
+
+#botonBarra {
+    -fx-background-color: #256D7B;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-padding: 0 10px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
