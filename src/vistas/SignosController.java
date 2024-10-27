@@ -20,9 +20,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import modelos.Usuario;
 
 /**
  * FXML Controller class
@@ -34,6 +36,16 @@ public class SignosController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML 
+    private Usuario usuario;
+    @FXML
+    private Label textoNombre;
+    @FXML
+    private Label textoEdad;
+    @FXML
+    private Label TextoPeso;
+    @FXML
+    private Label TextoSexo;
     
     @FXML
     private Button botonMinimizar;
@@ -57,6 +69,7 @@ public class SignosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Configurar el contexto gráfico
+                
         GraphicsContext gc = heartbeatCanvas.getGraphicsContext2D();
         gc.setStroke(Color.RED);
         gc.setLineWidth(2);
@@ -117,6 +130,20 @@ public class SignosController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        actualizarVistaConUsuario(); 
+    }
+    
+    private void actualizarVistaConUsuario() {
+        if (usuario != null) {
+            textoNombre.setText(usuario.getNombre());
+            TextoPeso.setText(usuario.getPeso() + " Kg");
+            textoEdad.setText(usuario.getEdad() + " años");
+            TextoSexo.setText(usuario.getSexo());
+        }
     }
     
 }

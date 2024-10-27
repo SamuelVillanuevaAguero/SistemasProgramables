@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import modelos.Usuario;
 
 /**
  * FXML Controller class
@@ -97,14 +98,33 @@ public class InicioSesionController implements Initializable {
         String usuario = entradaUsuario.getText();
         String contraseña = entradaContrasena.getText();
 
-        if (UsuarioControlador.iniciarSesion(usuario, contraseña)) {
-            Parent root = FXMLLoader.load(getClass().getResource("/vistas/Principal.fxml"));
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        if (usuario.isEmpty() || contraseña.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Cuidado");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Llena todos los campos");
+            alerta.showAndWait();
+            return;
+        }
 
+        if (UsuarioControlador.iniciarSesion(usuario, contraseña)) {
+            Usuario u = UsuarioControlador.getUsuario(usuario, contraseña);
+
+// Carga el archivo FXML primero
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Principal.fxml"));
+            Parent root = loader.load();  // Aquí se carga la vista
+
+// Ahora puedes obtener el controlador
+            PrincipalController controller = loader.getController();
+            controller.setUsuario(u);
+
+// Cambia de escena
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }else{
+
+        } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
             alerta.setTitle("inicio de sesión");
             alerta.setHeaderText("Usuario y/o contraseña incorrectas");

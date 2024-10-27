@@ -20,7 +20,7 @@ public class UsuarioControlador {
         String query = "INSERT INTO usuarios (id, nombre, alias, contraseña, correo, edad, peso, sexo) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
         try {
             Connection conexion = Conexion.getConexion();
-            
+
             PreparedStatement pstmt = conexion.prepareStatement(query);
 
             pstmt.setString(1, usuario.getNombre());
@@ -31,30 +31,53 @@ public class UsuarioControlador {
             pstmt.setDouble(6, usuario.getPeso());
             pstmt.setString(7, usuario.getSexo());
 
-
-            return pstmt.executeUpdate() > 0; 
+            return pstmt.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-    
-    public static boolean iniciarSesion(String usuario, String contraseña){
+
+    public static boolean iniciarSesion(String usuario, String contraseña) {
         String query = "SELECT * FROM usuarios WHERE alias = ? AND contraseña = ?";
-        
+
         try {
             Connection conexion = Conexion.getConexion();
-            
+
             PreparedStatement pstmt = conexion.prepareStatement(query);
             pstmt.setString(1, usuario);
             pstmt.setString(2, contraseña);
 
-            return pstmt.executeQuery().next(); 
+            return pstmt.executeQuery().next();
 
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public static Usuario getUsuario(String usuario, String contraseña) {
+        String query = "SELECT * FROM usuarios WHERE alias = ? AND contraseña = ?";
+
+        try {
+            Connection conexion = Conexion.getConexion();
+            PreparedStatement pstmt = conexion.prepareStatement(query);
+
+            pstmt.setString(1, usuario);
+            pstmt.setString(2, contraseña);
+
+            ResultSet result = pstmt.executeQuery();
+            while (result.next()) {
+
+                return new Usuario(result.getString("nombre"), result.getString("alias"),
+                        result.getString("contraseña"), result.getString("correo"), result.getInt("edad"), result.getDouble("peso"),
+                        result.getString("sexo"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

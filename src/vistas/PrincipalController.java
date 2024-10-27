@@ -19,9 +19,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modelos.Usuario;
+import vistas.HistorialController;
+import vistas.SignosController;
 
 /**
  * FXML Controller class
@@ -33,6 +37,10 @@ public class PrincipalController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    //DATOS DEL PACIENTE
+    
+    private Usuario usuario;
+
     @FXML
     private Pane botonSignos;
     @FXML
@@ -45,7 +53,6 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
         botonEstadisticas.setOnMouseClicked(event -> {
             try {
                 estadiscticas(event);
@@ -88,7 +95,26 @@ public class PrincipalController implements Initializable {
 
     @FXML
     public void signos(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Signos.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Signos.fxml"));
+        Parent root = loader.load();
+        SignosController controller = loader.getController();
+        controller.setUsuario(usuario);
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    public void estadiscticas(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Historial.fxml"));
+        Parent root = loader.load();
+        HistorialController controller = loader.getController();
+        controller.setUsuario(usuario);
+        
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(root);
@@ -96,14 +122,17 @@ public class PrincipalController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void estadiscticas(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Historial.fxml"));
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        actualizarVistaConUsuario(); 
+    }
+    
+    private void actualizarVistaConUsuario() {
+        if (usuario != null) {
+            // Aquí puedes acceder a usuario.getNombre() sin problema
+            // Por ejemplo, actualizando un Label:
+            System.out.println(usuario.getNombre());
+        }
     }
 
 }

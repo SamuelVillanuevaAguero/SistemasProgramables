@@ -18,11 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelos.Registro;
+import modelos.Usuario;
 
 /**
  * FXML Controller class
@@ -34,6 +36,16 @@ public class HistorialController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML 
+    private Usuario usuario;
+    @FXML
+    private Label textoNombre;
+    @FXML
+    private Label textoEdad;
+    @FXML
+    private Label TextoPeso;
+    @FXML
+    private Label TextoSexo;
     
     @FXML
     private Button botonCerrar;
@@ -109,6 +121,20 @@ public class HistorialController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        actualizarVistaConUsuario(); 
+    }
+    
+    private void actualizarVistaConUsuario() {
+        if (usuario != null) {
+            textoNombre.setText(usuario.getNombre());
+            TextoPeso.setText(usuario.getPeso() + " Kg");
+            textoEdad.setText(usuario.getEdad() + " años");
+            TextoSexo.setText(usuario.getSexo());
+        }
     }
     
 }
