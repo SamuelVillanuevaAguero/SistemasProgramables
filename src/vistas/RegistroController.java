@@ -4,6 +4,7 @@
  */
 package vistas;
 
+import controladores.UsuarioControlador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelos.Usuario;
 
@@ -212,9 +214,34 @@ public class RegistroController implements Initializable {
         Usuario usuario = new Usuario(nombre, alias, contraseña, correo, edad, peso, sexo);
 
         if (contraseña.equals(entradaConfirmacion.getText()) && !usuario.isEmpty()) {
-            System.out.println("");
-        } else {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("¿Los datos del registro son correctos?");
 
+            if (alerta.showAndWait().get() == ButtonType.OK) {
+                if (UsuarioControlador.RegistrarUsuario(usuario)) {
+                    alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Registro");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("Registro exitoso");
+                    alerta.showAndWait();
+                    
+                    botonRegresar.fire();
+                } else {
+                    alerta = new Alert(Alert.AlertType.ERROR);
+                    alerta.setTitle("Registro");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("Hubo un fallo en el registro");    
+                }
+            }
+
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Cuidado");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Llena todos los campos");
+            alerta.showAndWait();
         }
 
     }
