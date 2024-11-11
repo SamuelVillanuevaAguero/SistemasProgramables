@@ -46,7 +46,7 @@
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="45.0" layoutY="14.0" prefHeight="21.0" prefWidth="177.0" styleClass="info-card" text="RITMO CARDIACO" />
-            <Label alignment="CENTER" layoutX="45.0" layoutY="69.0" prefHeight="47.0" prefWidth="177.0" styleClass="info-card-signos" text="77 BPM" />
+            <Label fx:id="textoRitmo" alignment="CENTER" layoutX="45.0" layoutY="69.0" prefHeight="47.0" prefWidth="177.0" styleClass="info-card-signos" text="77 BPM" />
             <Label alignment="CENTER" layoutX="42.0" layoutY="35.0" prefHeight="21.0" prefWidth="177.0" styleClass="info-card" text="(ACTUAL)" />
          </children>
       </Pane>
@@ -58,7 +58,7 @@
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="45.0" layoutY="14.0" prefHeight="21.0" prefWidth="177.0" styleClass="info-card2" text="\% DE SPO2" />
-            <Label alignment="CENTER" layoutX="45.0" layoutY="69.0" prefHeight="47.0" prefWidth="177.0" styleClass="info-card-signos" text="79 %" />
+            <Label fx:id="textoOxigenacion" alignment="CENTER" layoutX="45.0" layoutY="69.0" prefHeight="47.0" prefWidth="177.0" styleClass="info-card-signos" text="79 %" />
             <Label alignment="CENTER" layoutX="40.0" layoutY="35.0" prefHeight="21.0" prefWidth="177.0" styleClass="info-card2" text="(ACTUAL)" />
          </children>
       </Pane>

@@ -114,13 +114,18 @@ public class HistorialController implements Initializable {
     
     @FXML
     public void regresar(ActionEvent event) throws IOException {
-        // Cargar el archivo FXML de la nueva interfaz
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Principal.fxml"));
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Principal.fxml"));
+            Parent root = loader.load();  // Aquí se carga la vista
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+// Ahora puedes obtener el controlador
+            PrincipalController controller = loader.getController();
+            controller.setUsuario(usuario);
+
+// Cambia de escena
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
     }
     
     public void setUsuario(Usuario usuario) {

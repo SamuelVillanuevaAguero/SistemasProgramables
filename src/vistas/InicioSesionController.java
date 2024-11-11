@@ -59,6 +59,7 @@ public class InicioSesionController implements Initializable {
         botonVerPass.setOnMouseReleased(event -> {
             verContraseñaMouseReleased(event);
         });
+        
 
     }
 
