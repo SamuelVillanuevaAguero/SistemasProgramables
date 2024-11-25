@@ -59,6 +59,15 @@ public class SignosController implements Initializable {
     private Canvas heartbeatCanvas;
     private int ritmoValue = 60;
 
+    private double x = 0;
+    private double y = 150;         // Línea base (punto de referencia)
+    private double speed = 5;       // Velocidad de desplazamiento de la línea
+    private int patternIndex = 0;
+
+    private final double[] pattern = {
+        100, 0, 0, 0, 0, 0, 0, -50, 0, 0, 0, 0, 0, 0, 0
+    };
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Configurar el contexto gráfico  
@@ -76,22 +85,32 @@ public class SignosController implements Initializable {
     }
 
     private void drawHeartbeat(GraphicsContext gc) {
-        // Limpar el area del electro
-        gc.clearRect(0, 0, heartbeatCanvas.getWidth(), heartbeatCanvas.getHeight());
+        System.out.println("HOLA");
+        if (!textoRitmo.getText().equals("0 BMP")) {
+            // Limpiar y reiniciar cuando se llegue al borde derecho del canvas
+            if (x > heartbeatCanvas.getWidth()) {
+                x = 0;
+                gc.clearRect(0, 0, heartbeatCanvas.getWidth(), heartbeatCanvas.getHeight());
+            }
 
-        //Centrar la linea jeje
-        double midY = heartbeatCanvas.getHeight() / 2;
-        double scaleY = 40;
+            // Calcular la posición Y según el patrón de ECG
+            double newY = y + pattern[patternIndex];
 
-        //Dibujo del electrocardiograma o cómo se escriba la verdad no estudié medicina
-        
+            // Dibujar línea entre el último punto y el nuevo
+            gc.strokeLine(x, y + pattern[patternIndex == 0 ? pattern.length - 1 : patternIndex - 1], x + speed, newY);
+
+            // Avanzar en x y en el patrón
+            x += speed;
+            patternIndex = (patternIndex + 1) % pattern.length;
+        }
+
     }
 
     private void startDataReceiver() {
         while (true) { // Bucle infinito para intentar siempre recibir datos
 
             try {
-                socket = new Socket("192.168.29.208", 12345);
+                socket = new Socket("192.168.1.11", 12345);
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String mensaje = in.readLine();
@@ -105,8 +124,7 @@ public class SignosController implements Initializable {
                         textoRitmo.setText(ritmo + " BPM");
                         textoOxigenacion.setText(oxigenacion + " %");
                         ritmoValue = Integer.parseInt(ritmo);
-                        
-                        
+
                     });
                 }
 
@@ -130,32 +148,31 @@ public class SignosController implements Initializable {
         alerta.setContentText("¿Quieres cerrar sesión?");
 
         if (alerta.showAndWait().get() == ButtonType.OK) {
-            
+
             Parent root = FXMLLoader.load(getClass().getResource("/vistas/InicioSesion.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            
-            
+
         }
     }
 
     @FXML
     public void regresar(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Principal.fxml"));
-            Parent root = loader.load();  // Aquí se carga la vista
+        Parent root = loader.load();  // Aquí se carga la vista
 
 // Ahora puedes obtener el controlador
-            PrincipalController controller = loader.getController();
-            controller.setUsuario(usuario);
+        PrincipalController controller = loader.getController();
+        controller.setUsuario(usuario);
 
 // Cambia de escena
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void setUsuario(Usuario usuario) {

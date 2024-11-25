@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Conexion {
 
-    static String MYSQL_DATABASE = "sql3740984";  
-    static String MYSQL_ROOT_PASSWORD = "EZj5F8WX2W";  
-    static String MYSQLUSER = "sql3740984";
-    static String MYSQLHOST = "sql3.freesqldatabase.com";
+    static String MYSQL_DATABASE = "sql5747228";  
+    static String MYSQL_ROOT_PASSWORD = "CYKWF7hlum";  
+    static String MYSQLUSER = "sql5747228";
+    static String MYSQLHOST = "sql5.freesqldatabase.com";
     static String MYSQLPORT = "3306";  
  
     static String url = "jdbc:mysql://" + MYSQLHOST + ":" + MYSQLPORT + "/" + MYSQL_DATABASE;  
@@ -85,5 +85,10 @@ public class Conexion {
                 System.out.println("Error al cerrar recursos: " + ex.getMessage());  
             }  
         }  
+    }
+    
+    public static void main(String[] args) {
+        crearTablaUsuarios();;
+        crearTablaHistorial();
     }
 }
