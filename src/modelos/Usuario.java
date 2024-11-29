@@ -31,8 +31,7 @@ public class Usuario {
     public String toString() {
         return nombre + alias + contraseña + correo + edad + peso + sexo;
     }
-    
-    
+        
 
     public String getNombre() {
         return nombre;

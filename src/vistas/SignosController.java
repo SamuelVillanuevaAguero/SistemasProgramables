@@ -110,7 +110,7 @@ public class SignosController implements Initializable {
         while (true) { // Bucle infinito para intentar siempre recibir datos
 
             try {
-                socket = new Socket("192.168.1.11", 12345);
+                socket = new Socket("192.168.227.107", 12345);
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String mensaje = in.readLine();

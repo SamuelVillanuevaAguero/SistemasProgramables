@@ -6,6 +6,7 @@ package vistas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +37,7 @@ public class HistorialController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML 
+    @FXML
     private Usuario usuario;
     @FXML
     private Label textoNombre;
@@ -46,14 +47,14 @@ public class HistorialController implements Initializable {
     private Label TextoPeso;
     @FXML
     private Label TextoSexo;
-    
+
     @FXML
     private Button botonCerrar;
     @FXML
     private Button botonMinimizar;
     @FXML
     private Button botonRegresar;
-    
+
     //TABLA
     @FXML
     private TableView<Registro> tableView;
@@ -63,7 +64,7 @@ public class HistorialController implements Initializable {
     private TableColumn<Registro, Integer> ritmoCardiacoColumn;
     @FXML
     private TableColumn<Registro, Integer> oxigenacionColumn;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -76,19 +77,14 @@ public class HistorialController implements Initializable {
 
         // Crear una lista de datos de ejemplo (puedes obtenerlos de una base de datos o de otro origen)
         ObservableList<Registro> data = FXCollections.observableArrayList(
-            new Registro("13/08/2024", 72, 97),
-            new Registro("14/08/2024", 68, 98),
-            new Registro("15/08/2024", 75, 96),
-            new Registro("16/08/2024", 80, 95),
-            new Registro("17/08/2024", 92, 94),
-            new Registro("18/08/2024", 70, 97),
-            new Registro("19/08/2024", 65, 98)
-        );
+                new Registro(Calendar.getInstance().get(Calendar.YEAR) + "/" + Calendar.getInstance().get(Calendar.MONTH) + "/"
+                        + Calendar.getInstance().get(Calendar.DATE), (int) (58 + Math.random() * (70 - 58)), (int) (95 + Math.random() * (97 - 95))));
 
         // Añadir los datos al TableView
         tableView.setItems(data);
+
     }
-    
+
     @FXML
     public void minimizarVentana(ActionEvent event) {
         ((Stage) botonMinimizar.getScene().getWindow()).setIconified(true);
@@ -111,28 +107,28 @@ public class HistorialController implements Initializable {
         }
 
     }
-    
+
     @FXML
     public void regresar(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/Principal.fxml"));
-            Parent root = loader.load();  // Aquí se carga la vista
+        Parent root = loader.load();  // Aquí se carga la vista
 
 // Ahora puedes obtener el controlador
-            PrincipalController controller = loader.getController();
-            controller.setUsuario(usuario);
+        PrincipalController controller = loader.getController();
+        controller.setUsuario(usuario);
 
 // Cambia de escena
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        actualizarVistaConUsuario(); 
+        actualizarVistaConUsuario();
     }
-    
+
     private void actualizarVistaConUsuario() {
         if (usuario != null) {
             textoNombre.setText(usuario.getNombre());
@@ -141,5 +137,5 @@ public class HistorialController implements Initializable {
             TextoSexo.setText(usuario.getSexo());
         }
     }
-    
+
 }
